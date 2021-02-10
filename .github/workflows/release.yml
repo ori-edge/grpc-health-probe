@@ -13,6 +13,24 @@ jobs:
       uses: actions/setup-go@v1
       with:
         go-version: 1.15
+      # The actions/setup-go action actually sets http.* to use the
+      # Authorization: basic $(base64 github-token) but we don't want this
+      # header to appear in any of our git https requests since it seems it
+      # does not work. So we disable this local setting and use instead
+      # url.insteadof globally so that 'go get' works. The PERSONAL_ACCESS_TOKEN
+      # is a Github personal token (https://github.com/settings/tokens) that has
+      # the role 'repo' (full control of private repositories). It is
+      # necessary because the {{github.token}} only allows us to access the
+      # current repository (apparently). Currently it's Matt's PAT. We should
+      # have a dedicated CI user for this.
+    - name: Setup git for access to remote repos
+      run: |
+        git config --local --remove-section http."https://github.com/"
+        git config --global url."https://foo:${PERSONAL_ACCESS_TOKEN}@github.com/ori-edge".insteadOf "https://github.com/ori-edge"
+      env:
+        PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    - name: Go get
+      run: go get ./...
     - name: GoReleaser
       uses: goreleaser/goreleaser-action@v1
       with:

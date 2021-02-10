@@ -1,13 +1,10 @@
-# grpc_health_probe(1)
-
-![ci](https://github.com/grpc-ecosystem/grpc-health-probe/workflows/ci/badge.svg)
-![GitHub all releases](https://img.shields.io/github/downloads/grpc-ecosystem/grpc-health-probe/total)
-
+# grpc_health_probe
 
 The `grpc_health_probe` utility allows you to query health of gRPC services that
-expose service their status through the [gRPC Health Checking Protocol][hc].
+expose service their status through the [OGE gRPC Health Checking Protocol][hc],
+a fork of the Google Health Check.
 
-This command-line utility makes a RPC to `/grpc.health.v1.Health/Check`. If it
+This command-line utility makes a RPC to `/health.v1.Health/Check`. If it
 responds with a `SERVING` status, the `grpc_health_probe` will exit with
 success, otherwise it will exit with a non-zero exit code (documented below).
 
@@ -36,8 +33,10 @@ exit status 2
 Installing from source (not recommended):
 
 - Make sure you have `git` and `go` installed.
-- Run: `go get github.com/grpc-ecosystem/grpc-health-probe`
+- Run: `go get github.com/oge-apis/grpc-health-probe`
 - This will compile the binary into your `$GOPATH/bin` (or `$HOME/go/bin`).
+
+# From the original Google repository:
 
 ## Using the gRPC Health Checking Protocol
 
@@ -167,7 +166,7 @@ a non-zero exit code.
 
 This is not an official Google project.
 
-[hc]: https://github.com/grpc/grpc/blob/master/doc/health-checking.md
+[hc]: https://github.com/ori-edge/oge-apis/tree/master/apis
 [k8s]: https://kubernetes.io/blog/2018/10/01/health-checking-grpc-servers-on-kubernetes/
 [execprobe]: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-a-liveness-command
-[rel]: https://github.com/grpc-ecosystem/grpc-health-probe/releases
+[rel]: https://github.com/grpc-ecosystem/oge-apis/releases

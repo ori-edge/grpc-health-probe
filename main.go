@@ -25,10 +25,10 @@ import (
 	"os/signal"
 	"time"
 
+	healthpb "github.com/ori-edge/oge-apis/pkg/apis"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/credentials"
-	healthpb "google.golang.org/grpc/health/grpc_health_v1"
 	"google.golang.org/grpc/status"
 )
 
